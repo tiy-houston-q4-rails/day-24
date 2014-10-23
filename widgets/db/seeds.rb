@@ -11,8 +11,6 @@ end
 
 
 50.times do
-  product = Product.create name: Faker::Commerce.product_name
-  10.times do
-    product.widgets.create name: Faker::Lorem.word
-  end
+  names = 10.times.map { Faker::Lorem.word }
+  Product.create_product_with_widgets Faker::Commerce.product_name, names
 end
