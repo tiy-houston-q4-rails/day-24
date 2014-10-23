@@ -1,0 +1,22 @@
+<h1>Products</h1>
+
+<%= form_tag root_path, method: :get do %>
+  <%= text_field_tag :qs, params[:qs] %>
+  <%= submit_tag "Search"%>
+<% end %>
+
+<% if params[:qs].present? %>
+  <p>
+  Found: <%= pluralize @products.total_count, "product" %> for your search "<%= params[:qs] %>"
+  </p>
+<% end %>
+
+<% @products.each do |product| %>
+  <h2><%= highlight product.name, params[:qs] %> </h2>
+
+  <% product.widgets.each do |widget| %>
+    <%= widget.name %></br/>
+  <% end %>
+<% end %>
+
+<%= paginate @products %>
